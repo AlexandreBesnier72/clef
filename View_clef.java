@@ -38,6 +38,7 @@ public class View_clef
         System.out.println( "[7] sortir du programme." );
 
         saisie = sc.nextInt();
+        sc.nextLine(); // debug
 
         return saisie;
     }
@@ -49,7 +50,7 @@ public class View_clef
         if ( saisie.length() < 4 )
         {
             error = true;
-            System.out.println( "Le nom du propiétarie est trop court." );
+            System.out.println( "Le nom du propiétaire est trop court." );
         }
 
         return error;
@@ -97,27 +98,30 @@ public class View_clef
         boolean dispo = false;
 
         // variable d'erreur
-        boolean error = false;
+        boolean error;
 
         do
         {
             System.out.println( "Qu'elle est le nom du propriétaire ? ( min 4 caractères )" );
-            saisieProprio = sc.next();
+            saisieProprio = sc.nextLine();
 
             System.out.println( "Qu'elle est le nom de la porte ?" );
-            saisiePorte = sc.next();
+            saisiePorte = sc.nextLine();
 
             System.out.println( "Qu'elle est le nom de la marque ? ( min 2 caractères )" );
-            saisieMarque = sc.next();
+            saisieMarque = sc.nextLine();
 
             System.out.println( "Qu'elle technologie utilise la clef ? [A/E]");
             saisieTechno = sc.next().toLowerCase().charAt(0);
+            sc.nextLine(); // debug
 
             System.out.println( "De quelle matière est faite la clef ?" );
-            saisieMatiere = sc.next();
+            saisieMatiere = sc.nextLine();
 
             System.out.println( "La clé est-elle dispo ? [O/N]" );
             saisieDispo = sc.next().toLowerCase().charAt(0);
+            sc.nextLine(); // debug
+
             if ( saisieDispo == 'o')
             {
                 dispo = true;
@@ -151,5 +155,15 @@ public class View_clef
         newClef = saisie.iterator();
 
         return newClef;
+    }
+
+    public String remove()
+    {
+        String saisieId;
+
+        System.out.println("Qu'elle est l'id de la clé à supprimer ?");
+        saisieId = sc.next();
+
+        return saisieId;
     }
 }
