@@ -17,11 +17,14 @@ public class main
         Scanner sc = new Scanner( System.in );
 
         // saisie
-        int saisieMenu;
         Iterator newClef;
+        Iterator updateClef;
+        int saisieMenu;
+        String id;
+        String paramName;
+        String value;
 
         // saisie d'attribut de clef
-        String saisieId;
         String saisieProprio;
         String saisiePorte;
         String saisieMarque;
@@ -29,8 +32,6 @@ public class main
         String saisieMatiere;
         boolean saisieDispo = false;
 
-        char saisieChar;
-        String saisieValue;
 
         // variable d'erreur
         boolean error = false;
@@ -55,8 +56,8 @@ public class main
                     // si il existe au moins une clé
                     if ( !gc.getFirstClefs().equals( "" ) )
                     {
-                        saisieId = vc.remove();
-                        gc.remove(saisieId);
+                        id = vc.remove();
+                        gc.remove(id);
                     }
                     else
                     {
@@ -66,90 +67,19 @@ public class main
 
                 // modifier une clé
                 case 3 :
-//                    // si il existe au moins une clé
-//                    if ( gc.getFirstClefs() != null )
-//                    {
-//                        do
-//                        {
-//                            error = false;
-//
-//                            System.out.println( "Qu'elle est l'id de la clé à changer ?" );
-//                            saisieId = sc.next();
-//
-//                            if ( gc.clefExist( saisieId ) )
-//                            {
-//                                gc.uneClef( saisieId );
-//
-//                                System.out.println( "Quelle est le nom du champs à modifier ?" );
-//                                System.out.print( "[1] Propriétaire - " );
-//                                System.out.print( "[2] Numéro de la porte - " );
-//                                System.out.print( "[3] Marque - " );
-//                                System.out.print( "[4] Technologie - " );
-//                                System.out.println( "[5] La disponibilité" );
-//                                saisie = sc.nextInt();
-//                                switch ( saisie )
-//                                {
-//                                    // proprio
-//                                    case 1 :
-//                                        do
-//                                        {
-//                                            System.out.println( "Qu'elle est la valeur ? ( min 4 caractères )" );
-//                                            saisieValue = sc.next();
-//                                        } while ( saisieValue.length() < 4 );
-//
-//                                        gc.update(saisieId, "propriétaire", saisieValue);
-//                                        break;
-//
-//                                    // porte
-//                                    case 2 :
-//                                        System.out.println( "Qu'elle est la valeur ?" );
-//                                        saisieValue = sc.next();
-//
-//                                        gc.update(saisieId, "porte", saisieValue);
-//                                        break;
-//
-//                                    // marque
-//                                    case 3 :
-//                                        do
-//                                        {
-//                                            System.out.println( "Qu'elle est la valeur ? ( min 2 caractères )" );
-//                                            saisieValue = sc.next();
-//                                        } while( saisieValue.length() < 2 );
-//
-//                                        gc.update(saisieId, "marque", saisieValue);
-//                                        break;
-//
-//                                    // techno
-//                                    case 4 :
-//                                        do
-//                                        {
-//                                            System.out.println( "Qu'elle est la valeur ? [A/E]" );
-//                                            saisieChar = sc.next().toLowerCase().charAt(0);
-//                                        } while ( saisieChar != 'a' && saisieChar != 'e' );
-//
-//                                        gc.update(saisieId, "technologie", saisieChar);
-//                                        break;
-//
-//                                    // disponibilité
-//                                    case 5 :
-//                                        gc.update(saisieId, "dispo");
-//                                        break;
-//
-//                                    default :
-//                                        System.out.println( "Erreur de saisie" );
-//
-//                                }
-//                            }
-//                            else
-//                            {
-//                                error = true;
-//                            }
-//                        } while ( error );
-//                    }
-//                    else
-//                    {
-//                        System.out.println( "Aucune clé existe." );
-//                    }
+                    // si il existe au moins une clé
+                    if ( !gc.getFirstClefs().equals( "" ) )
+                    {
+                        // TODO: 30/11/2018 Trouver un moyen d'afficher la clé qu'on met à jour
+                        // gc.uneClef( saisieId );
+
+                        updateClef = vc.update();
+                        gc.update( updateClef );
+                    }
+                    else
+                    {
+                        System.out.println( "Aucune clé existe." );
+                    }
                     break;
 
                 // recherche
@@ -203,27 +133,27 @@ public class main
 
                 // afficher une clé
                 case 6 :
-                    // si il existe au moins une clé
-                    if ( gc.getFirstClefs() != null )
-                    {
-                        do
-                        {
-                            if ( error )
-                            {
-                                System.out.println( "Le numéro de clef saisie est incorrecte." );
-                            }
-                            System.out.println( "Qu'elle est l'ID de la clef ?" );
-                            saisieId = sc.next();
-
-                            error = true;
-                        } while ( !gc.clefExist( saisieId ) );
-                        error = false;
-                        gc.uneClef(saisieId);
-                    }
-                    else
-                    {
-                        System.out.println( "Aucune clé existe." );
-                    }
+//                    // si il existe au moins une clé
+//                    if ( gc.getFirstClefs() != null )
+//                    {
+//                        do
+//                        {
+//                            if ( error )
+//                            {
+//                                System.out.println( "Le numéro de clef saisie est incorrecte." );
+//                            }
+//                            System.out.println( "Qu'elle est l'ID de la clef ?" );
+//                            saisieId = sc.next();
+//
+//                            error = true;
+//                        } while ( !gc.clefExist( saisieId ) );
+//                        error = false;
+//                        gc.uneClef(saisieId);
+//                    }
+//                    else
+//                    {
+//                        System.out.println( "Aucune clé existe." );
+//                    }
                     break;
 
                 // sortie
