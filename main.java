@@ -55,20 +55,8 @@ public class main
                     // si il existe au moins une clé
                     if ( !gc.getFirstClefs().equals( "" ) )
                     {
-                        do
-                        {
-                            System.out.println("Qu'elle est l'id de la clé à supprimer ?");
-                            saisieId = sc.next();
-
-                            if (gc.clefExist(saisieId))
-                            {
-                                error = false;
-                                gc.remove(saisieId);
-                            } else
-                            {
-                                error = true;
-                            }
-                        } while (error);
+                        saisieId = vc.remove();
+                        gc.remove(saisieId);
                     }
                     else
                     {
