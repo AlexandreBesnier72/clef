@@ -302,16 +302,23 @@ public class Gestion_clefs
      */
     public void remove(String id)
     {
-        for (int i = 0; i < maxClefs; i++)
+        if (this.clefExist(id))
         {
-            if ( clefs[i] != null )
+            for (int i = 0; i < maxClefs; i++)
             {
-                if ( clefs[i].getId().equals( id ) )
+                if ( clefs[i] != null )
                 {
-                    clefs[i] = null;
-                    System.out.println( "Clef supprimée." );
+                    if ( clefs[i].getId().equals( id ) )
+                    {
+                        clefs[i] = null;
+                        System.out.println( "Clef supprimée." );
+                    }
                 }
             }
+        }
+        else
+        {
+            System.out.println( "La clé n'existe pas." );
         }
     }
 
