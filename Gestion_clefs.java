@@ -1,5 +1,7 @@
 package clef;
 
+import java.util.Iterator;
+
 public class Gestion_clefs
 {
     private int maxClefs;
@@ -104,12 +106,21 @@ public class Gestion_clefs
     /**
      * Ajoute une clef
      */
-    public void add( String proprietaire, String porte, String marque, char technologie, String matiere, boolean dispo )
+    public void add( Iterator newClef )
     {
+        String proprietaire = newClef.next().toString();
+        String porte = newClef.next().toString();
+        String marque = newClef.next().toString();
+        char technologie = newClef.next().toString().charAt(0);
+        String matiere = newClef.next().toString();
+        boolean dispo = Boolean.valueOf(newClef.next().toString());
+
+        int number;
+        int id;
+
         if ( !isClefsComplet() )
         {
-            int id = this.placeLibre();
-            int number;
+            id = this.placeLibre();
 
             number = this.nbFois( proprietaire ) + 1;
 
