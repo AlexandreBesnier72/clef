@@ -134,6 +134,43 @@ public class Gestion_clefs
     }
 
     /**
+     * Compte le nombre de paramètre et renvoie vers la bonne méthode "update"
+     */
+    public void update( Iterator updateClef )
+    {
+        String id;
+        String paramName;
+        String value;
+        char valueChar;
+
+        id = updateClef.next().toString();
+        paramName = updateClef.next().toString();
+
+        // si il y a 3 arguments
+        if ( updateClef.hasNext() )
+        {
+            value = updateClef.next().toString();
+            // si le string à une longueur de 1 alors on le convertit en string
+            if ( value.length() == 1 )
+            {
+                valueChar = value.charAt(0);
+                this.update(id, paramName, valueChar);
+            }
+            else
+            {
+                this.update(id, paramName, value);
+            }
+        }
+
+        // si il y a 2 arguments
+        else
+        {
+            id = updateClef.next().toString();
+            paramName = updateClef.next().toString();
+            this.update(id, paramName);
+        }
+    }
+    /**
      * Mets à jour une clef
      * @param id du tableau
      * @param paramName nom du paramêtre
@@ -141,90 +178,113 @@ public class Gestion_clefs
      */
     public void update(String id, String paramName, String value)
     {
-        for (int i = 0; i < maxClefs; i++)
+        if ( this.clefExist( id ) )
         {
-            if ( clefs[i] != null )
+            for (int i = 0; i < maxClefs; i++)
             {
-                if ( clefs[i].getId().equals( id ) )
+                if ( clefs[i] != null )
                 {
-                    switch (paramName)
+                    if ( clefs[i].getId().equals( id ) )
                     {
-                        case "propriétaire":
-                            clefs[i].setProprietaire( value );
-                            // mets à jour l'id
-                            clefs[i].setId( this.nbFois( clefs[i].getProprietaire() ) );
-                            System.out.println( "Le propriétaire a bien été mis à jour." );
-                            break;
+                        switch (paramName)
+                        {
+                            case "propriétaire":
+                                clefs[i].setProprietaire( value );
+                                // mets à jour l'id
+                                clefs[i].setId( this.nbFois( clefs[i].getProprietaire() ) );
+                                System.out.println( "Le propriétaire a bien été mis à jour." );
+                                break;
 
-                        case "porte":
-                            clefs[i].setPorte( value );
-                            System.out.println( "La porte a bien été mis à jour." );
-                            break;
+                            case "porte":
+                                clefs[i].setPorte( value );
+                                System.out.println( "La porte a bien été mis à jour." );
+                                break;
 
-                        case "marque":
-                            clefs[i].setMarque( value );
-                            // mets à jour l'id
-                            clefs[i].setId( this.nbFois( clefs[i].getProprietaire() ) );
-                            System.out.println( "La marque a bien été mis à jour." );
-                            break;
+                            case "marque":
+                                clefs[i].setMarque( value );
+                                // mets à jour l'id
+                                clefs[i].setId( this.nbFois( clefs[i].getProprietaire() ) );
+                                System.out.println( "La marque a bien été mis à jour." );
+                                break;
 
-                        case "matière":
-                            clefs[i].setMatiere( value );
-                            System.out.println( "La matière a bien été mis à jour." );
-                            break;
+                            case "matière":
+                                clefs[i].setMatiere( value );
+                                System.out.println( "La matière a bien été mis à jour." );
+                                break;
 
-                        default :
-                            System.out.println( "La valeur saisie est incorrecte" );
+                            default :
+                                System.out.println( "La valeur saisie est incorrecte" );
+                        }
                     }
                 }
             }
+        }
+        else
+        {
+            System.out.println( "La clef n'existe pas." );
         }
     }
     public void update(String id, String paramName, char value)
     {
-        for (int i = 0; i < maxClefs; i++)
+        if ( this.clefExist( id ) )
         {
-            if ( clefs[i] != null )
+            for (int i = 0; i < maxClefs; i++)
             {
-                if (clefs[i].getId().equals(id))
+                if ( clefs[i] != null )
                 {
-                    if (paramName.equals("technologie"))
+                    if (clefs[i].getId().equals(id))
                     {
-                        clefs[i].setTechnologie(value);
-                        System.out.println( "La valeur a bien été mise à jour" );
-                    } else
-                    {
-                        System.out.println("La valeur saisie est incorrecte");
+                        if (paramName.equals("technologie"))
+                        {
+                            clefs[i].setTechnologie(value);
+                            System.out.println( "La valeur a bien été mise à jour" );
+                        } else
+                        {
+                            System.out.println("La valeur saisie est incorrecte");
+                        }
                     }
                 }
             }
         }
+        else
+        {
+            System.out.println( "La clef n'existe pas." );
+        }
+
     }
     public void update(String id, String paramName)
     {
         boolean dispo = true;
 
-        for (int i = 0; i < maxClefs; i++)
+        if ( this.clefExist( id ) )
         {
-            if ( clefs[i] != null )
+            for (int i = 0; i < maxClefs; i++)
             {
-                if (clefs[i].getId().equals(id))
+                if ( clefs[i] != null )
                 {
-                    if (paramName.equals("dispo"))
+                    if (clefs[i].getId().equals(id))
                     {
-                        if (clefs[i].isDispo())
+                        if (paramName.equals("dispo"))
                         {
-                            dispo = false;
+                            if (clefs[i].isDispo())
+                            {
+                                dispo = false;
+                            }
+                            clefs[i].setDispo(dispo);
+                            System.out.println("La disponibilité a été mise à jour.");
+                        } else
+                        {
+                            System.out.println("La valeur saisie est incorrecte");
                         }
-                        clefs[i].setDispo(dispo);
-                        System.out.println("La disponibilité a été mise à jour.");
-                    } else
-                    {
-                        System.out.println("La valeur saisie est incorrecte");
                     }
                 }
             }
         }
+        else
+        {
+            System.out.println( "La clef n'existe pas." );
+        }
+
     }
 
     /**
@@ -318,7 +378,7 @@ public class Gestion_clefs
         }
         else
         {
-            System.out.println( "La clé n'existe pas." );
+            System.out.println( "La clef n'existe pas." );
         }
     }
 
