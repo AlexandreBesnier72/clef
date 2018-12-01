@@ -92,7 +92,7 @@ public class main
                 // liste complète
                 case 5 :
                     // si il existe au moins une clé
-                    if ( gc.getFirstClefs() != null )
+                    if ( !gc.getFirstClefs().equals( "" ) )
                     {
                         gc.liste();
                     }
@@ -105,7 +105,7 @@ public class main
                 // afficher une clé
                 case 6 :
                     // si il existe au moins une clé
-                    if ( gc.getFirstClefs() != null )
+                    if ( !gc.getFirstClefs().equals( "" ) )
                     {
                         id = vc.listOneKey();
                         gc.uneClef(id);
