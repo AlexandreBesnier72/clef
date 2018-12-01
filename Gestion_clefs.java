@@ -105,6 +105,7 @@ public class Gestion_clefs
 
     /**
      * Ajoute une clef
+     * @param newClef stock la nouvelle clef
      */
     public void add( Iterator newClef )
     {
@@ -135,6 +136,7 @@ public class Gestion_clefs
 
     /**
      * Compte le nombre de paramètre et renvoie vers la bonne méthode "update"
+     * @param updateClef stock l'id de la clef, le nom du paramêtre à changer et la nouvelle valeur à assigner
      */
     public void update( Iterator updateClef )
     {
@@ -176,7 +178,7 @@ public class Gestion_clefs
      * @param paramName nom du paramêtre
      * @param value nouvelle valeur
      */
-    public void update(String id, String paramName, String value)
+    private void update(String id, String paramName, String value)
     {
         if ( this.clefExist( id ) )
         {
@@ -224,7 +226,7 @@ public class Gestion_clefs
             System.out.println( "La clef n'existe pas." );
         }
     }
-    public void update(String id, String paramName, char value)
+    private void update(String id, String paramName, char value)
     {
         if ( this.clefExist( id ) )
         {
@@ -252,7 +254,7 @@ public class Gestion_clefs
         }
 
     }
-    public void update(String id, String paramName)
+    private void update(String id, String paramName)
     {
         boolean dispo = true;
 
@@ -287,6 +289,29 @@ public class Gestion_clefs
 
     }
 
+    /**
+     * Détermine si la valeur est sois un character, sois un String ou sois un booléen
+     * @param searchClef stock le type et la valeur de la recherche
+     */
+    public void search( Iterator searchClef )
+    {
+        String type = searchClef.next().toString();
+
+        switch ( type )
+        {
+            case "char":
+                this.search( searchClef.next().toString().charAt(0) );
+                break;
+
+            case "string":
+                this.search( searchClef.next().toString() );
+                break;
+
+            case "boolean":
+                this.search( Boolean.valueOf( searchClef.next().toString() ) );
+                break;
+        }
+    }
     /**
      * Cherche les clefs qui correspondent à la valeur
      * @param value valeur de la recherche
@@ -335,6 +360,42 @@ public class Gestion_clefs
             }
         }
     }
+    /**
+     * Affiche les clefs dispo ou indisponible
+     * @param dispo true si c'est les clefs dispo, false si c'est les clefs indispo
+     */
+    public void search(boolean dispo)
+    {
+        if ( dispo )
+        {
+            System.out.println( "Liste des clefs dispo." );
+            for (int i = 0; i < maxClefs; i++)
+            {
+                if ( clefs[i] != null )
+                {
+                    if ( clefs[i].isDispo() )
+                    {
+                        afficherClef(i);
+                    }
+                }
+            }
+        }
+        else
+        {
+            for (int i = 0; i < maxClefs; i++)
+            {
+                if ( clefs[i] != null )
+                {
+                    if ( !clefs[i].isDispo() )
+                    {
+                        afficherClef(i);
+                    }
+                }
+            }
+            System.out.println( "Liste des clefs indisponible." );
+        }
+
+    }
 
     /**
      * Nombre de fois qu'on ajoute une clé à un propriétaire
@@ -380,43 +441,6 @@ public class Gestion_clefs
         {
             System.out.println( "La clef n'existe pas." );
         }
-    }
-
-    /**
-     * Affiche les clefs dispo ou indisponible
-     * @param dispo true si c'est les clefs dispo, false si c'est les clefs indispo
-     */
-    public void clefsDispoIndispo( boolean dispo )
-    {
-        if ( dispo )
-        {
-            System.out.println( "Liste des clefs dispo." );
-            for (int i = 0; i < maxClefs; i++)
-            {
-                if ( clefs[i] != null )
-                {
-                    if ( clefs[i].isDispo() )
-                    {
-                        afficherClef(i);
-                    }
-                }
-            }
-        }
-        else
-        {
-            for (int i = 0; i < maxClefs; i++)
-            {
-                if ( clefs[i] != null )
-                {
-                    if ( !clefs[i].isDispo() )
-                    {
-                        afficherClef(i);
-                    }
-                }
-            }
-            System.out.println( "Liste des clefs indisponible." );
-        }
-
     }
 
     /**

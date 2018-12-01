@@ -19,6 +19,7 @@ public class main
         // saisie
         Iterator newClef;
         Iterator updateClef;
+        Iterator searchClef;
         int saisieMenu;
         String id;
         String paramName;
@@ -84,38 +85,8 @@ public class main
 
                 // recherche
                 case 4 :
-//                    System.out.println( "[1] la recherche est un caractère." );
-//                    System.out.println( "[2] la recherche est une chaine de caratères." );
-//                    System.out.println( "[3] Afficher toutes les clefs disponible." );
-//                    System.out.println( "[4] Afficher toutes les clefs indisponible." );
-//                    saisie = sc.nextInt();
-//
-//                    switch (saisie)
-//                    {
-//                        case 1 :
-//                            System.out.println( "Entrez la valeur :" );
-//                            saisieValue = sc.next();
-//                            saisieChar = saisieValue.charAt(0);
-//                            gc.search( saisieChar );
-//                            break;
-//
-//                        case 2 :
-//                            System.out.println( "Entrez la valeur :" );
-//                            saisieValue = sc.next();
-//                            gc.search( saisieValue );
-//                            break;
-//
-//                        case 3 :
-//                            gc.clefsDispoIndispo( true );
-//                            break;
-//
-//                        case 4 :
-//                            gc.clefsDispoIndispo( false );
-//                            break;
-//
-//                        default:
-//                            System.out.println( "La saisie est invalide." );
-//                    }
+                    searchClef = vc.search();
+                    gc.search( searchClef );
                     break;
 
                 // liste complète
