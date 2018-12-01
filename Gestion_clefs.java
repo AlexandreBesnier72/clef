@@ -138,7 +138,6 @@ public class Gestion_clefs
 
             clefs[id] = new Clef( number, proprietaire, porte, marque, technologie, matiere, dispo );
             System.out.println( "Clef ajoutée." );
-            this.uneClef( clefs[id].getId() );
         }
         else
         {
