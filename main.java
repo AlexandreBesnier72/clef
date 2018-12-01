@@ -1,7 +1,6 @@
 package clef;
 
 import java.util.Iterator;
-import java.util.Scanner;
 
 public class main
 {
@@ -13,29 +12,12 @@ public class main
         // controller gestion_clefs
         Gestion_clefs gc = new Gestion_clefs( 3 );
 
-        //objet scanner
-        Scanner sc = new Scanner( System.in );
-
         // saisie
         Iterator newClef;
         Iterator updateClef;
         Iterator searchClef;
         int saisieMenu;
         String id;
-        String paramName;
-        String value;
-
-        // saisie d'attribut de clef
-        String saisieProprio;
-        String saisiePorte;
-        String saisieMarque;
-        char saisieTechno;
-        String saisieMatiere;
-        boolean saisieDispo = false;
-
-
-        // variable d'erreur
-        boolean error = false;
 
         // variable de sortie
         boolean exit = false;
@@ -71,11 +53,13 @@ public class main
                     // si il existe au moins une clé
                     if ( !gc.getFirstClefs().equals( "" ) )
                     {
-                        // TODO: 30/11/2018 Trouver un moyen d'afficher la clé qu'on met à jour
-                        // gc.uneClef( saisieId );
+                        updateClef = vc.update( gc );
 
-                        updateClef = vc.update();
-                        gc.update( updateClef );
+                        // ne lance pas l'update si la saisie échoue
+                        if ( updateClef.hasNext() )
+                        {
+                            gc.update( updateClef );
+                        }
                     }
                     else
                     {

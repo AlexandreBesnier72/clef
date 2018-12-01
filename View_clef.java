@@ -258,7 +258,7 @@ public class View_clef
      * Récupère l'id de la clef à modifier, ainsi que le nom du champs et la nouvelle valeur à assigner
      * @return l'id, le nom du champs et la nouvelle valeur
      */
-    public Iterator update()
+    public Iterator update( Gestion_clefs gc )
     {
         // Objet de stockage des saisies
         ArrayList<Object> saisie = new ArrayList<>();
@@ -283,73 +283,84 @@ public class View_clef
             error = false;
 
             saisieId = this.saisieId();
-            saisie.add(saisieId);
 
-            System.out.println( "Quelle est le nom du champs à modifier ?" );
-            System.out.print( "[1] Propriétaire - " );
-            System.out.print( "[2] Numéro de la porte - " );
-            System.out.print( "[3] Marque - " );
-            System.out.print( "[4] Technologie - " );
-            System.out.print( "[5] Matière - " );
-            System.out.println( "[6] La disponibilité" );
-
-            saisieMenu = this.saisieMenu();
-
-            switch ( saisieMenu )
+            // vérifie si la clef existe
+            if ( gc.clefExist( saisieId ) )
             {
-                // proprio
-                case 1 :
-                    do
-                    {
-                        saisieProprio = this.saisiePropio();
-                    } while ( saisieProprio.length() < 4 );
+                saisie.add(saisieId);
+                gc.uneClef( saisieId );
 
-                    saisie.add("propriétaire");
-                    saisie.add(saisieProprio);
-                    break;
+                System.out.println( "Quelle est le nom du champs à modifier ?" );
+                System.out.print( "[1] Propriétaire - " );
+                System.out.print( "[2] Numéro de la porte - " );
+                System.out.print( "[3] Marque - " );
+                System.out.print( "[4] Technologie - " );
+                System.out.print( "[5] Matière - " );
+                System.out.println( "[6] La disponibilité" );
 
-                // porte
-                case 2 :
-                    saisie.add("porte");
-                    saisie.add( this.saisiePorte() );
-                    break;
+                saisieMenu = this.saisieMenu();
 
-                // marque
-                case 3 :
-                    do
-                    {
-                        saisieMarque = this.saisieMarque();
-                    } while( saisieMarque.length() < 2 );
+                switch ( saisieMenu )
+                {
+                    // proprio
+                    case 1 :
+                        do
+                        {
+                            saisieProprio = this.saisiePropio();
+                        } while ( saisieProprio.length() < 4 );
 
-                    saisie.add("marque");
-                    saisie.add(saisieMarque);
-                    break;
+                        saisie.add("propriétaire");
+                        saisie.add(saisieProprio);
+                        break;
 
-                // techno
-                case 4 :
-                    do
-                    {
-                        saisieTechno = this.saisieTechno();
-                    } while ( saisieTechno != 'a' && saisieTechno != 'e' );
+                    // porte
+                    case 2 :
+                        saisie.add("porte");
+                        saisie.add( this.saisiePorte() );
+                        break;
 
-                    saisie.add("technologie");
-                    saisie.add(saisieTechno);
-                    break;
+                    // marque
+                    case 3 :
+                        do
+                        {
+                            saisieMarque = this.saisieMarque();
+                        } while( saisieMarque.length() < 2 );
 
-                // matière
-                case 5 :
-                    saisie.add("matière");
-                    saisie.add( this.saisieMatiere() );
-                    break;
+                        saisie.add("marque");
+                        saisie.add(saisieMarque);
+                        break;
 
-                // disponibilité
-                case 6 :
-                    saisie.add("dispo");
-                    break;
+                    // techno
+                    case 4 :
+                        do
+                        {
+                            saisieTechno = this.saisieTechno();
+                        } while ( saisieTechno != 'a' && saisieTechno != 'e' );
 
-                default :
-                    System.out.println( "Erreur de saisie" );
+                        saisie.add("technologie");
+                        saisie.add(saisieTechno);
+                        break;
+
+                    // matière
+                    case 5 :
+                        saisie.add("matière");
+                        saisie.add( this.saisieMatiere() );
+                        break;
+
+                    // disponibilité
+                    case 6 :
+                        saisie.add("dispo");
+                        break;
+
+                    default :
+                        System.out.println( "Erreur de saisie" );
+                }
             }
+            else
+            {
+                System.out.println( "La clé n'existe pas" );
+            }
+
         } while ( error );
 
         updateClef = saisie.iterator();
