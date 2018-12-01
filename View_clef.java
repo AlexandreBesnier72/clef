@@ -8,6 +8,11 @@ public class View_clef
 {
     private Scanner sc = new Scanner( System.in );
 
+    /**
+     * Vérifie la longueur du nom du pripriétaire
+     * @param saisie nom du propriétaire
+     * @return true si il y a une erreur
+     */
     private boolean errorProprio( String saisie )
     {
         boolean error = false;
@@ -21,6 +26,11 @@ public class View_clef
         return error;
     }
 
+    /**
+     * Vérifie la longueur du nom de la marque
+     * @param saisie nom de la marque
+     * @return true si il y a une erreur
+     */
     private boolean errorMarque( String saisie )
     {
         boolean error = false;
@@ -33,6 +43,12 @@ public class View_clef
 
         return error;
     }
+
+    /**
+     * Vérifie si l'utilisateur à bien rentré 'O' ou 'N'
+     * @param saisie 'O'ui ou 'N'on
+     * @return true si il y a une erreur
+     */
     private boolean errorDispo( char saisie )
     {
         boolean error = false;
@@ -46,6 +62,10 @@ public class View_clef
         return error;
     }
 
+    /**
+     * Méthodes de saisie, contient le texte correspondant à l'entrée souhaiter + une saisie de l'utilisateur
+     * @return la saisie
+     */
     private int saisieMenu()
     {
         int saisie;
@@ -55,7 +75,6 @@ public class View_clef
 
         return saisie;
     }
-
     private String saisieId()
     {
         String saisie;
@@ -65,7 +84,6 @@ public class View_clef
 
         return saisie;
     }
-
     private String saisiePropio()
     {
         String saisie;
@@ -75,7 +93,6 @@ public class View_clef
 
         return saisie;
     }
-
     private String saisiePorte()
     {
         String saisie;
@@ -85,7 +102,6 @@ public class View_clef
 
         return saisie;
     }
-
     private String saisieMarque()
     {
         String saisie;
@@ -95,7 +111,6 @@ public class View_clef
 
         return saisie;
     }
-
     private char saisieTechno()
     {
         char saisie;
@@ -106,7 +121,6 @@ public class View_clef
 
         return saisie;
     }
-
     private String saisieMatiere()
     {
         String saisie;
@@ -116,7 +130,6 @@ public class View_clef
 
         return saisie;
     }
-
     private char saisieDispo()
     {
         char saisie;
@@ -127,7 +140,6 @@ public class View_clef
 
         return saisie;
     }
-
     private String saisieValue()
     {
         String saisie;
@@ -138,6 +150,10 @@ public class View_clef
         return saisie;
     }
 
+    /**
+     * Affiche le menu principale
+     * @return l'entier saisie correspondant à l'action souhaitée
+     */
     public int mainMenu()
     {
         // saisie
@@ -157,6 +173,10 @@ public class View_clef
         return saisie;
     }
 
+    /**
+     * Récupère les données dont le controller à besoin pour créer une nouvelle clef
+     * @return les données de la nouvelle clef
+     */
     public Iterator add()
     {
         // Objet de stockage des saisies
@@ -221,6 +241,10 @@ public class View_clef
         return newClef;
     }
 
+    /**
+     * Récupère l'id de la clef à supprimer
+     * @return l'id de la clef à supprimer
+     */
     public String remove()
     {
         String saisieId;
@@ -230,6 +254,10 @@ public class View_clef
         return saisieId;
     }
 
+    /**
+     * Récupère l'id de la clef à modifier, ainsi que le nom du champs et la nouvelle valeur à assigner
+     * @return l'id, le nom du champs et la nouvelle valeur
+     */
     public Iterator update()
     {
         // Objet de stockage des saisies
@@ -329,6 +357,10 @@ public class View_clef
         return updateClef;
     }
 
+    /**
+     * Récupère le type de données sur laquelle va s'effectuer la recherche et la veleur à rechercher
+     * @return le type de données et la recherche
+     */
     public Iterator search()
     {
         ArrayList<Object> saisie = new ArrayList<>();
@@ -376,6 +408,10 @@ public class View_clef
         return searchClef;
     }
 
+    /**
+     * Récupère l'id de la clef à afficher
+     * @return l'id de la clef à afficher
+     */
     public String listOneKey()
     {
         String saisieId;
