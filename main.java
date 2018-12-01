@@ -133,27 +133,16 @@ public class main
 
                 // afficher une clé
                 case 6 :
-//                    // si il existe au moins une clé
-//                    if ( gc.getFirstClefs() != null )
-//                    {
-//                        do
-//                        {
-//                            if ( error )
-//                            {
-//                                System.out.println( "Le numéro de clef saisie est incorrecte." );
-//                            }
-//                            System.out.println( "Qu'elle est l'ID de la clef ?" );
-//                            saisieId = sc.next();
-//
-//                            error = true;
-//                        } while ( !gc.clefExist( saisieId ) );
-//                        error = false;
-//                        gc.uneClef(saisieId);
-//                    }
-//                    else
-//                    {
-//                        System.out.println( "Aucune clé existe." );
-//                    }
+                    // si il existe au moins une clé
+                    if ( gc.getFirstClefs() != null )
+                    {
+                        id = vc.listOneKey();
+                        gc.uneClef(id);
+                    }
+                    else
+                    {
+                        System.out.println( "Aucune clé existe." );
+                    }
                     break;
 
                 // sortie

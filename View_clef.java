@@ -60,7 +60,7 @@ public class View_clef
     {
         String saisie;
 
-        System.out.println( "Qu'elle est l'id de la clé à changer ?" );
+        System.out.println( "Qu'elle est l'id de la clé ?" );
         saisie = sc.nextLine();
 
         return saisie;
@@ -215,8 +215,7 @@ public class View_clef
     {
         String saisieId;
 
-        System.out.println("Qu'elle est l'id de la clé à supprimer ?");
-        saisieId = sc.next();
+        saisieId = this.saisieId();
 
         return saisieId;
     }
@@ -311,5 +310,14 @@ public class View_clef
         updateClef = saisie.iterator();
 
         return updateClef;
+    }
+
+    public String listOneKey()
+    {
+        String saisieId;
+
+        saisieId = this.saisieId();
+
+        return saisieId;
     }
 }
