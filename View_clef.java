@@ -128,6 +128,16 @@ public class View_clef
         return saisie;
     }
 
+    private String saisieValue()
+    {
+        String saisie;
+
+        System.out.println( "Entrez la valeur :" );
+        saisie = sc.nextLine();
+
+        return saisie;
+    }
+
     public int mainMenu()
     {
         // saisie
@@ -252,7 +262,8 @@ public class View_clef
             System.out.print( "[2] Numéro de la porte - " );
             System.out.print( "[3] Marque - " );
             System.out.print( "[4] Technologie - " );
-            System.out.println( "[5] La disponibilité" );
+            System.out.print( "[5] Matière - " );
+            System.out.println( "[6] La disponibilité" );
 
             saisieMenu = this.saisieMenu();
 
@@ -297,8 +308,14 @@ public class View_clef
                     saisie.add(saisieTechno);
                     break;
 
-                // disponibilité
+                // matière
                 case 5 :
+                    saisie.add("matière");
+                    saisie.add( this.saisieMatiere() );
+                    break;
+
+                // disponibilité
+                case 6 :
                     saisie.add("dispo");
                     break;
 
@@ -310,6 +327,53 @@ public class View_clef
         updateClef = saisie.iterator();
 
         return updateClef;
+    }
+
+    public Iterator search()
+    {
+        ArrayList<Object> saisie = new ArrayList<>();
+        Iterator searchClef;
+        int saisieMenu;
+
+        System.out.println( "[1] la recherche est un caractère." );
+        System.out.println( "[2] la recherche est une chaine de caratères." );
+        System.out.println( "[3] Afficher toutes les clefs disponible." );
+        System.out.println( "[4] Afficher toutes les clefs indisponible." );
+        saisieMenu = this.saisieMenu();
+
+        switch (saisieMenu)
+        {
+            // char
+            case 1 :
+                saisie.add( "char" );
+                saisie.add( this.saisieValue().charAt(0) );
+                break;
+
+            // string
+            case 2 :
+                saisie.add( "string" );
+                saisie.add( this.saisieValue() );
+                break;
+
+            // dispo - true
+            case 3 :
+                saisie.add( "boolean" );
+                saisie.add( true );
+                break;
+
+            // dispo - false
+            case 4 :
+                saisie.add( "boolean" );
+                saisie.add( false );
+                break;
+
+            default:
+                System.out.println( "La saisie est invalide." );
+        }
+
+        searchClef = saisie.iterator();
+
+        return searchClef;
     }
 
     public String listOneKey()
