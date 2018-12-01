@@ -27,9 +27,20 @@ public class Gestion_clefs
      */
     public String getFirstClefs()
     {
-        if (clefs[0] != null)
+        int i = 0;
+        boolean trouver = false;
+        do
         {
-            return clefs[0].getId();
+            if ( clefs[i] != null )
+            {
+                trouver = true;
+            }
+            i++;
+        } while ( !trouver && i < maxClefs );
+
+        if ( trouver )
+        {
+            return clefs[i - 1].getId();
         }
         else
         {
