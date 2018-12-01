@@ -1,24 +1,15 @@
 package clef;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 
 public class Gestion_clefs
 {
-    private int maxClefs;
-
     // tableau avec les clefs
-    private Clef[] clefs;
+    private ArrayList<Clef> clefs = new ArrayList<>();
 
-    public Gestion_clefs( int maxClefs )
+    public Gestion_clefs()
     {
-        this.maxClefs = maxClefs;
-        this.clefs  = new Clef[this.maxClefs];
-
-        // initialisation du tableau
-        for (int i = 0; i < maxClefs; i++)
-        {
-            clefs[i] = null;
-        }
     }
 
     /**
@@ -29,22 +20,19 @@ public class Gestion_clefs
     {
         int i = 0;
         boolean trouver = false;
-        do
+        while ( !trouver && clefs.size() != 0 )
         {
-            if ( clefs[i] != null )
-            {
-                trouver = true;
-            }
+            trouver = true;
             i++;
-        } while ( !trouver && i < maxClefs );
+        }
 
         if ( trouver )
         {
-            return clefs[i - 1].getId();
+            return clefs.get(i - 1).getId();
         }
         else
         {
-            return "";
+            return null;
         }
     }
 
@@ -60,58 +48,17 @@ public class Gestion_clefs
 
         do
         {
-            if ( clefs[i] != null )
+            if ( clefs.get(i) != null )
             {
-                if ( clefs[i].getId().equals( id ) )
+                if ( clefs.get(i).getId().equals( id ) )
                 {
                     exist = true;
                 }
             }
             i++;
-        } while( !exist && i < this.maxClefs );
+        } while( !exist );
 
         return exist;
-    }
-
-    /**
-     * Vérifie si l'objet est complet
-     * @return true si il y a de la place
-     */
-    private boolean isClefsComplet ()
-    {
-        boolean complet = true;
-        int i = 0;
-
-        do
-        {
-            if (clefs[i] == null)
-            {
-                complet = false;
-            }
-            i++;
-        } while( complet && i < this.maxClefs);
-
-        return complet;
-    }
-
-    /**
-     * cherche une place libre dans l'objet clefs
-     * @return l'id de la première place disponible
-     */
-    private int placeLibre()
-    {
-        boolean trouver = false;
-        int i = 0;
-        do
-        {
-            if (clefs[i] == null)
-            {
-                trouver = true;
-            }
-            i++;
-        } while( !trouver );
-
-        return --i;
     }
 
     /**
@@ -127,22 +74,11 @@ public class Gestion_clefs
         String matiere = newClef.next().toString();
         boolean dispo = Boolean.valueOf(newClef.next().toString());
 
-        int number;
-        int id;
+        int number = this.nbFois( proprietaire ) + 1;;
 
-        if ( !isClefsComplet() )
-        {
-            id = this.placeLibre();
-
-            number = this.nbFois( proprietaire ) + 1;
-
-            clefs[id] = new Clef( number, proprietaire, porte, marque, technologie, matiere, dispo );
-            System.out.println( "Clef ajoutée." );
-        }
-        else
-        {
-            System.out.println( "On ne peut plus ajouter de clé, l'espace mémoire est pleins." );
-        }
+        clefs.add( new Clef( number, proprietaire, porte, marque, technologie, matiere, dispo ) );
+        System.out.println( "Clef ajoutée." );
+        this.uneClef( clefs.get(clefs.size() - 1).getId() );
     }
 
     /**
@@ -178,8 +114,6 @@ public class Gestion_clefs
         // si il y a 2 arguments
         else
         {
-            id = updateClef.next().toString();
-            paramName = updateClef.next().toString();
             this.update(id, paramName);
         }
     }
@@ -193,35 +127,35 @@ public class Gestion_clefs
     {
         if ( this.clefExist( id ) )
         {
-            for (int i = 0; i < maxClefs; i++)
+            for (int i = 0; i < clefs.size(); i++)
             {
-                if ( clefs[i] != null )
+                if ( clefs.get(i) != null )
                 {
-                    if ( clefs[i].getId().equals( id ) )
+                    if ( clefs.get(i).getId().equals( id ) )
                     {
                         switch (paramName)
                         {
                             case "propriétaire":
-                                clefs[i].setProprietaire( value );
+                                clefs.get(i).setProprietaire( value );
                                 // mets à jour l'id
-                                clefs[i].setId( this.nbFois( clefs[i].getProprietaire() ) );
+                                clefs.get(i).setId( this.nbFois( clefs.get(i).getProprietaire() ) );
                                 System.out.println( "Le propriétaire a bien été mis à jour." );
                                 break;
 
                             case "porte":
-                                clefs[i].setPorte( value );
+                                clefs.get(i).setPorte( value );
                                 System.out.println( "La porte a bien été mis à jour." );
                                 break;
 
                             case "marque":
-                                clefs[i].setMarque( value );
+                                clefs.get(i).setMarque( value );
                                 // mets à jour l'id
-                                clefs[i].setId( this.nbFois( clefs[i].getProprietaire() ) );
+                                clefs.get(i).setId( this.nbFois( clefs.get(i).getProprietaire() ) );
                                 System.out.println( "La marque a bien été mis à jour." );
                                 break;
 
                             case "matière":
-                                clefs[i].setMatiere( value );
+                                clefs.get(i).setMatiere( value );
                                 System.out.println( "La matière a bien été mis à jour." );
                                 break;
 
@@ -241,15 +175,15 @@ public class Gestion_clefs
     {
         if ( this.clefExist( id ) )
         {
-            for (int i = 0; i < maxClefs; i++)
+            for (int i = 0; i < clefs.size(); i++)
             {
-                if ( clefs[i] != null )
+                if ( clefs.get(i) != null )
                 {
-                    if (clefs[i].getId().equals(id))
+                    if (clefs.get(i).getId().equals(id))
                     {
                         if (paramName.equals("technologie"))
                         {
-                            clefs[i].setTechnologie(value);
+                            clefs.get(i).setTechnologie(value);
                             System.out.println( "La valeur a bien été mise à jour" );
                         } else
                         {
@@ -271,19 +205,19 @@ public class Gestion_clefs
 
         if ( this.clefExist( id ) )
         {
-            for (int i = 0; i < maxClefs; i++)
+            for (int i = 0; i < clefs.size(); i++)
             {
-                if ( clefs[i] != null )
+                if ( clefs.get(i) != null )
                 {
-                    if (clefs[i].getId().equals(id))
+                    if (clefs.get(i).getId().equals(id))
                     {
                         if (paramName.equals("dispo"))
                         {
-                            if (clefs[i].isDispo())
+                            if (clefs.get(i).isDispo())
                             {
                                 dispo = false;
                             }
-                            clefs[i].setDispo(dispo);
+                            clefs.get(i).setDispo(dispo);
                             System.out.println("La disponibilité a été mise à jour.");
                         } else
                         {
@@ -330,27 +264,27 @@ public class Gestion_clefs
     public void search(String value)
     {
         System.out.println( "Le résultat de la recherche " + value + " est :" );
-        for (int i = 0; i < maxClefs; i++)
+        for (int i = 0; i < clefs.size(); i++)
         {
-            if ( clefs[i] != null )
+            if ( clefs.get(i) != null )
             {
-                if ( value.equals( clefs[i].getId() ) )
+                if ( value.equals( clefs.get(i).getId() ) )
                 {
                     afficherClef(i);
                 }
-                else if ( value.equals( clefs[i].getProprietaire() ) )
+                else if ( value.equals( clefs.get(i).getProprietaire() ) )
                 {
                     afficherClef(i);
                 }
-                else if ( value.equals( clefs[i].getPorte() ) )
+                else if ( value.equals( clefs.get(i).getPorte() ) )
                 {
                     afficherClef(i);
                 }
-                else if ( value.equals( clefs[i].getMarque() ) )
+                else if ( value.equals( clefs.get(i).getMarque() ) )
                 {
                     afficherClef(i);
                 }
-                else if ( value.equals( clefs[i].getMatiere() ) )
+                else if ( value.equals( clefs.get(i).getMatiere() ) )
                 {
                     afficherClef(i);
                 }
@@ -360,11 +294,11 @@ public class Gestion_clefs
     public void search(char value)
     {
         System.out.println( "Le résultat de la recherche " + value + " est :" );
-        for (int i = 0; i < maxClefs; i++)
+        for (int i = 0; i < clefs.size(); i++)
         {
-            if ( clefs[i] != null )
+            if ( clefs.get(i) != null )
             {
-                if ( value == clefs[i].getTechnologie() )
+                if ( value == clefs.get(i).getTechnologie() )
                 {
                     afficherClef(i);
                 }
@@ -380,11 +314,11 @@ public class Gestion_clefs
         if ( dispo )
         {
             System.out.println( "Liste des clefs dispo." );
-            for (int i = 0; i < maxClefs; i++)
+            for (int i = 0; i < clefs.size(); i++)
             {
-                if ( clefs[i] != null )
+                if ( clefs.get(i) != null )
                 {
-                    if ( clefs[i].isDispo() )
+                    if ( clefs.get(i).isDispo() )
                     {
                         afficherClef(i);
                     }
@@ -393,11 +327,11 @@ public class Gestion_clefs
         }
         else
         {
-            for (int i = 0; i < maxClefs; i++)
+            for (int i = 0; i < clefs.size(); i++)
             {
-                if ( clefs[i] != null )
+                if ( clefs.get(i) != null )
                 {
-                    if ( !clefs[i].isDispo() )
+                    if ( !clefs.get(i).isDispo() )
                     {
                         afficherClef(i);
                     }
@@ -416,11 +350,11 @@ public class Gestion_clefs
     public int nbFois( String proprietaire )
     {
         int compteur = 0;
-        for (int i = 0; i < maxClefs; i++)
+        for (int i = 0; i < clefs.size(); i++)
         {
-            if ( clefs[i] != null )
+            if ( clefs.get(i) != null )
             {
-                if ( proprietaire.equals( clefs[i].getProprietaire() ) )
+                if ( proprietaire.equals( clefs.get(i).getProprietaire() ) )
                 {
                     compteur++;
                 }
@@ -436,13 +370,13 @@ public class Gestion_clefs
     {
         if (this.clefExist(id))
         {
-            for (int i = 0; i < maxClefs; i++)
+            for (int i = 0; i < clefs.size(); i++)
             {
-                if ( clefs[i] != null )
+                if ( clefs.get(i) != null )
                 {
-                    if ( clefs[i].getId().equals( id ) )
+                    if ( clefs.get(i).getId().equals( id ) )
                     {
-                        clefs[i] = null;
+                        clefs.remove(i);
                         System.out.println( "Clef supprimée." );
                     }
                 }
@@ -460,7 +394,7 @@ public class Gestion_clefs
     public void liste()
     {
         System.out.println( "Liste des clefs :" );
-        for (int i = 0; i < maxClefs; i++)
+        for (int i = 0; i < clefs.size(); i++)
         {
             this.afficherClef(i);
         }
@@ -476,16 +410,13 @@ public class Gestion_clefs
         int i = 0;
         do
         {
-            if (clefs[i] != null)
+            if ( clefs.get(i).getId().equals( id ) )
             {
-                if ( clefs[i].getId().equals( id ) )
-                {
-                    this.afficherClef(i);
-                    trouver = true;
-                }
+                this.afficherClef(i);
+                trouver = true;
             }
             i++;
-        } while( !trouver || i >= maxClefs );
+        } while( !trouver && i < clefs.size() );
     }
 
     /**
@@ -494,16 +425,16 @@ public class Gestion_clefs
      */
     private void afficherClef(int idArray)
     {
-        if ( clefs[idArray] != null )
+        if ( clefs.get(idArray) != null )
         {
             System.out.println(
-                    String.valueOf( "ID : " + clefs[idArray].getId()) + " | " +
-                            "Propriétaire : " + clefs[idArray].getProprietaire() + " | " +
-                            "Porte : " + clefs[idArray].getPorte() + " | " +
-                            "Marque : " + clefs[idArray].getMarque() + " | " +
-                            "Technologie : " + clefs[idArray].getTechnologie() + " | " +
-                            "Matière : " + clefs[idArray].getMatiere() + " | " +
-                            "Disponibilité : " + clefs[idArray].isDispo()
+                    String.valueOf( "ID : " + clefs.get(idArray).getId()) + " | " +
+                            "Propriétaire : " + clefs.get(idArray).getProprietaire() + " | " +
+                            "Porte : " + clefs.get(idArray).getPorte() + " | " +
+                            "Marque : " + clefs.get(idArray).getMarque() + " | " +
+                            "Technologie : " + clefs.get(idArray).getTechnologie() + " | " +
+                            "Matière : " + clefs.get(idArray).getMatiere() + " | " +
+                            "Disponibilité : " + clefs.get(idArray).isDispo()
             );
         }
     }

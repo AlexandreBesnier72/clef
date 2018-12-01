@@ -10,7 +10,7 @@ public class main
         View_clef vc = new View_clef();
 
         // controller gestion_clefs
-        Gestion_clefs gc = new Gestion_clefs( 3 );
+        Gestion_clefs gc = new Gestion_clefs();
 
         // saisie
         Iterator newClef;
@@ -37,7 +37,7 @@ public class main
                 // Supprimer une clé
                 case 2 :
                     // si il existe au moins une clé
-                    if ( !gc.getFirstClefs().equals( "" ) )
+                    if ( gc.getFirstClefs() != null )
                     {
                         id = vc.remove();
                         gc.remove(id);
@@ -51,7 +51,7 @@ public class main
                 // modifier une clé
                 case 3 :
                     // si il existe au moins une clé
-                    if ( !gc.getFirstClefs().equals( "" ) )
+                    if ( gc.getFirstClefs() != null )
                     {
                         updateClef = vc.update( gc );
 
@@ -76,7 +76,7 @@ public class main
                 // liste complète
                 case 5 :
                     // si il existe au moins une clé
-                    if ( !gc.getFirstClefs().equals( "" ) )
+                    if ( gc.getFirstClefs() != null )
                     {
                         gc.liste();
                     }
@@ -89,7 +89,7 @@ public class main
                 // afficher une clé
                 case 6 :
                     // si il existe au moins une clé
-                    if ( !gc.getFirstClefs().equals( "" ) )
+                    if ( gc.getFirstClefs() != null )
                     {
                         id = vc.listOneKey();
                         gc.uneClef(id);

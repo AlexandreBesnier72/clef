@@ -106,7 +106,7 @@ public class View_clef
     {
         String saisie;
 
-        System.out.println( "Qu'elle est le nom de la marque ?" );
+        System.out.println( "Qu'elle est le nom de la marque ? ( min 2 caractères )" );
         saisie = sc.nextLine();
 
         return saisie;
