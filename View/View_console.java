@@ -9,60 +9,7 @@ import java.util.Scanner;
 public class View_console
 {
     private Scanner sc = new Scanner( System.in );
-
-    /**
-     * Vérifie la longueur du nom du pripriétaire
-     * @param saisie nom du propriétaire
-     * @return true si il y a une erreur
-     */
-    private boolean errorProprio( String saisie )
-    {
-        boolean error = false;
-
-        if ( saisie.length() < 4 )
-        {
-            error = true;
-            System.out.println( "Le nom du propiétaire est trop court." );
-        }
-
-        return error;
-    }
-
-    /**
-     * Vérifie la longueur du nom de la marque
-     * @param saisie nom de la marque
-     * @return true si il y a une erreur
-     */
-    private boolean errorMarque( String saisie )
-    {
-        boolean error = false;
-
-        if ( saisie.length() < 2 )
-        {
-            error = true;
-            System.out.println( "Le nom de la marque est trop court." );
-        }
-
-        return error;
-    }
-
-    /**
-     * Vérifie si l'utilisateur à bien rentré 'O' ou 'N'
-     * @param saisie 'O'ui ou 'N'on
-     * @return true si il y a une erreur
-     */
-    private boolean errorDispo( char saisie )
-    {
-        boolean error = false;
-
-        if ( saisie != 'o' && saisie != 'n' )
-        {
-            error = true;
-            System.out.println( "La valeur saisie dans dispo doit sois être 'O'ui ou 'N'on." );
-        }
-
-        return error;
-    }
+    private View_error viewError = new View_error();
 
     /**
      * Méthodes de saisie, contient le texte correspondant à l'entrée souhaiter + une saisie de l'utilisateur
@@ -218,15 +165,15 @@ public class View_console
             }
 
             // vérif
-            error = this.errorDispo(saisieDispo);
+            error = viewError.errorDispo(saisieDispo);
             if ( !error )
             {
-                error = this.errorProprio(saisieProprio);
+                error = viewError.errorProprio(saisieProprio);
             }
 
             if ( !error )
             {
-                error = this.errorMarque(saisieMarque);
+                error = viewError.errorMarque(saisieMarque);
             }
 
         } while(error);
