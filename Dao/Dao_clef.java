@@ -4,6 +4,7 @@ import clef.Bean.Clef;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Map;
 
 public class Dao_clef
 {
@@ -67,16 +68,25 @@ public class Dao_clef
      * Ajoute une clef
      * @param newClef stock la nouvelle clef
      */
-    public void add( Iterator newClef )
+    public void add( Map<String, String> newClef )
     {
-        String proprietaire = newClef.next().toString();
-        String porte = newClef.next().toString();
-        String marque = newClef.next().toString();
-        char technologie = newClef.next().toString().charAt(0);
-        String matiere = newClef.next().toString();
-        boolean dispo = Boolean.valueOf(newClef.next().toString());
+        // constante
+        final String PROPRIO = "propriétaire";
+        final String PORTE = "porte";
+        final String MARQUE = "marque";
+        final String TECHNO = "technologie";
+        final String MATIERE = "matière";
+        final String DISPO = "dispo";
 
-        int number = this.nbFois( proprietaire ) + 1;;
+        // attribut de la clef / conversion de type
+        String proprietaire = newClef.get(PROPRIO);
+        String porte = newClef.get(PORTE);
+        String marque = newClef.get(MARQUE);
+        char technologie = newClef.get(TECHNO).charAt(0);
+        String matiere = newClef.get(MATIERE);
+        boolean dispo = Boolean.valueOf(newClef.get(DISPO));
+
+        int number = this.nbFois( proprietaire ) + 1;
 
         clefs.add( new Clef( number, proprietaire, porte, marque, technologie, matiere, dispo ) );
         System.out.println( "Clef ajoutée." );

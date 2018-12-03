@@ -2,9 +2,7 @@ package clef.View;
 
 import clef.Dao.Dao_clef;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Scanner;
+import java.util.*;
 
 public class View_console
 {
@@ -59,12 +57,12 @@ public class View_console
 
         return saisie;
     }
-    private char saisieTechno()
+    private String saisieTechno()
     {
-        char saisie;
+        String saisie;
 
         System.out.println( "Qu'elle technologie utilise la clef ? [A/E]");
-        saisie = sc.next().toLowerCase().charAt(0);
+        saisie = sc.next().toLowerCase();
         sc.nextLine(); // debug
 
         return saisie;
@@ -125,19 +123,24 @@ public class View_console
      * Récupère les données dont le controller à besoin pour créer une nouvelle clef
      * @return les données de la nouvelle clef
      */
-    public Iterator add()
+    public Map add()
     {
-        // Objet de stockage des saisies
-        ArrayList<Object> saisie = new ArrayList<>();
+        // Nouvelle clef
+        Map<String, String> newClef = new HashMap<>();
 
-        // objet de retour
-        Iterator newClef;
+        // constante
+        final String PROPRIO = "propriétaire";
+        final String PORTE = "porte";
+        final String MARQUE = "marque";
+        final String TECHNO = "technologie";
+        final String MATIERE = "matière";
+        final String DISPO = "dispo";
 
         // saisie d'attribut de clef
         String saisieProprio;
         String saisiePorte;
         String saisieMarque;
-        char saisieTechno;
+        String saisieTechno;
         String saisieMatiere;
         char saisieDispo;
         boolean dispo = false;
@@ -147,20 +150,49 @@ public class View_console
 
         do
         {
-            saisieProprio = this.saisiePropio();
-            saisiePorte = this.saisiePorte();
-            saisieMarque = this.saisieMarque();
-            saisieTechno = this.saisieTechno();
-            saisieMatiere = this.saisieMatiere();
-            saisieDispo = this.saisieDispo();
+            // saisie propriétaire
+            do
+            {
+                saisieProprio = this.saisiePropio();
+            } while ( saisieProprio.length() < 4 );
+            newClef.put(PROPRIO, saisieProprio);
+
+            do
+            {
+                saisiePorte = this.saisiePorte();
+            } while ( saisiePorte.length() <= 0 );
+            newClef.put(PORTE, saisiePorte);
+
+            do
+            {
+                saisieMarque = this.saisieMarque();
+            } while ( saisieMarque.length() <= 0 );
+            newClef.put(MARQUE, saisieMarque);
+
+            do
+            {
+                saisieTechno = this.saisieTechno();
+            } while ( saisieTechno.charAt(0) != 'a' && saisieTechno.charAt(0) != 'o' );
+            newClef.put(TECHNO, saisieTechno);
+
+            do
+            {
+                saisieMatiere = this.saisieMatiere();
+            } while ( saisieMatiere.length() <= 0 );
+            newClef.put(MATIERE, saisieMatiere);
+
+            do
+            {
+                saisieDispo = this.saisieDispo();
+            } while ( saisieDispo != 'o' && saisieDispo != 'n' );
 
             if ( saisieDispo == 'o')
             {
-                dispo = true;
+                newClef.put(DISPO, "true");
             }
-            else if ( saisieDispo == 'n' )
+            else
             {
-                dispo = false;
+                newClef.put(DISPO, "false");
             }
 
             // vérif
@@ -176,15 +208,6 @@ public class View_console
             }
 
         } while(error);
-
-        saisie.add( saisieProprio );
-        saisie.add( saisiePorte );
-        saisie.add( saisieMarque );
-        saisie.add( saisieTechno );
-        saisie.add( saisieMatiere );
-        saisie.add( dispo );
-
-        newClef = saisie.iterator();
 
         return newClef;
     }

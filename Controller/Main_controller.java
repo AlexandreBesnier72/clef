@@ -4,6 +4,7 @@ import clef.Dao.Dao_clef;
 import clef.View.View_console;
 
 import java.util.Iterator;
+import java.util.Map;
 
 public class Main_controller
 {
@@ -26,7 +27,7 @@ public class Main_controller
         // saisie
         char saisieMenu;
         String id;
-        Iterator newClef;
+        Map<String, String> newClef;
         Iterator updateClef;
         Iterator searchClef;
 
