@@ -10,10 +10,10 @@ public class Main_controller
     public static void main( String[] args )
     {
         // view clef
-        View_console vc = new View_console();
+        View_console viewConsole = new View_console();
 
         // controller gestion_clefs
-        Dao_clef gc = new Dao_clef();
+        Dao_clef daoClef = new Dao_clef();
 
         // saisie
         Iterator newClef;
@@ -27,23 +27,23 @@ public class Main_controller
 
         do
         {
-            saisieMenu = vc.mainMenu();
+            saisieMenu = viewConsole.mainMenu();
 
             switch ( saisieMenu )
             {
                 // Ajouter un clé
                 case 1 :
-                    newClef = vc.add();
-                    gc.add( newClef );
+                    newClef = viewConsole.add();
+                    daoClef.add( newClef );
                     break;
 
                 // Supprimer une clé
                 case 2 :
                     // si il existe au moins une clé
-                    if ( gc.getFirstClefs() != null )
+                    if ( daoClef.getFirstClefs() != null )
                     {
-                        id = vc.remove();
-                        gc.remove(id);
+                        id = viewConsole.remove();
+                        daoClef.remove(id);
                     }
                     else
                     {
@@ -54,14 +54,14 @@ public class Main_controller
                 // modifier une clé
                 case 3 :
                     // si il existe au moins une clé
-                    if ( gc.getFirstClefs() != null )
+                    if ( daoClef.getFirstClefs() != null )
                     {
-                        updateClef = vc.update( gc );
+                        updateClef = viewConsole.update( daoClef );
 
                         // ne lance pas l'update si la saisie échoue
                         if ( updateClef.hasNext() )
                         {
-                            gc.update( updateClef );
+                            daoClef.update( updateClef );
                         }
                     }
                     else
@@ -72,16 +72,16 @@ public class Main_controller
 
                 // recherche
                 case 4 :
-                    searchClef = vc.search();
-                    gc.search( searchClef );
+                    searchClef = viewConsole.search();
+                    daoClef.search( searchClef );
                     break;
 
                 // liste complète
                 case 5 :
                     // si il existe au moins une clé
-                    if ( gc.getFirstClefs() != null )
+                    if ( daoClef.getFirstClefs() != null )
                     {
-                        gc.liste();
+                        daoClef.liste();
                     }
                     else
                     {
@@ -92,10 +92,10 @@ public class Main_controller
                 // afficher une clé
                 case 6 :
                     // si il existe au moins une clé
-                    if ( gc.getFirstClefs() != null )
+                    if ( daoClef.getFirstClefs() != null )
                     {
-                        id = vc.listOneKey();
-                        gc.uneClef(id);
+                        id = viewConsole.listOneKey();
+                        daoClef.uneClef(id);
                     }
                     else
                     {
