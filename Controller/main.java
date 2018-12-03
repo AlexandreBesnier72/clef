@@ -1,4 +1,7 @@
-package clef;
+package clef.Controller;
+
+import clef.Gestion_clefs;
+import clef.View_clef;
 
 import java.util.Iterator;
 
