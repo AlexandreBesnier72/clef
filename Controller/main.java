@@ -1,7 +1,7 @@
 package clef.Controller;
 
 import clef.Dao.Gestion_clefs;
-import clef.View_clef;
+import clef.View.View_clef;
 
 import java.util.Iterator;
 

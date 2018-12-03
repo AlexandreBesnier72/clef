@@ -1,4 +1,4 @@
-package clef;
+package clef.View;
 
 import clef.Dao.Gestion_clefs;
 
