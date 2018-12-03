@@ -1,4 +1,4 @@
-package clef;
+package clef.Bean;
 
 public class Clef
 {

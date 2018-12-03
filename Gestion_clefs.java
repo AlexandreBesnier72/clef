@@ -1,5 +1,7 @@
 package clef;
 
+import clef.Bean.Clef;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
