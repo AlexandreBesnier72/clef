@@ -1,6 +1,6 @@
 package clef.Controller;
 
-import clef.Dao.Gestion_clefs;
+import clef.Dao.Dao_clef;
 import clef.View.View_clef;
 
 import java.util.Iterator;
@@ -13,7 +13,7 @@ public class main
         View_clef vc = new View_clef();
 
         // controller gestion_clefs
-        Gestion_clefs gc = new Gestion_clefs();
+        Dao_clef gc = new Dao_clef();
 
         // saisie
         Iterator newClef;

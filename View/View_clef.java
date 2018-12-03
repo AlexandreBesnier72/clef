@@ -1,6 +1,6 @@
 package clef.View;
 
-import clef.Dao.Gestion_clefs;
+import clef.Dao.Dao_clef;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -260,7 +260,7 @@ public class View_clef
      * Récupère l'id de la clef à modifier, ainsi que le nom du champs et la nouvelle valeur à assigner
      * @return l'id, le nom du champs et la nouvelle valeur
      */
-    public Iterator update( Gestion_clefs gc )
+    public Iterator update( Dao_clef gc )
     {
         // Objet de stockage des saisies
         ArrayList<Object> saisie = new ArrayList<>();

@@ -5,12 +5,12 @@ import clef.Bean.Clef;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class Gestion_clefs
+public class Dao_clef
 {
     // tableau avec les clefs
     private ArrayList<Clef> clefs = new ArrayList<>();
 
-    public Gestion_clefs()
+    public Dao_clef()
     {
     }
 
