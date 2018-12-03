@@ -1,4 +1,4 @@
-package clef;
+package clef.Dao;
 
 import clef.Bean.Clef;
 
