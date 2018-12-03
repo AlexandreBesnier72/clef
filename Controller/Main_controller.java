@@ -1,7 +1,7 @@
 package clef.Controller;
 
 import clef.Dao.Dao_clef;
-import clef.View.View_clef;
+import clef.View.View_console;
 
 import java.util.Iterator;
 
@@ -10,7 +10,7 @@ public class Main_controller
     public static void main( String[] args )
     {
         // view clef
-        View_clef vc = new View_clef();
+        View_console vc = new View_console();
 
         // controller gestion_clefs
         Dao_clef gc = new Dao_clef();
