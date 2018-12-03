@@ -5,7 +5,7 @@ import clef.View.View_clef;
 
 import java.util.Iterator;
 
-public class main
+public class Main_controller
 {
     public static void main( String[] args )
     {
