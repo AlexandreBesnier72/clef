@@ -305,7 +305,7 @@ public class View_console
                     case 4 :
                         do
                         {
-                            saisieTechno = this.saisieTechno();
+                            saisieTechno = this.saisieTechno().charAt(0);
                         } while ( saisieTechno != 'a' && saisieTechno != 'e' );
 
                         saisie.add("technologie");
