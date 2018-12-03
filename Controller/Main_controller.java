@@ -9,18 +9,26 @@ public class Main_controller
 {
     public static void main( String[] args )
     {
-        // view clef
+        // view console
         View_console viewConsole = new View_console();
 
-        // controller gestion_clefs
+        // Dao clef
         Dao_clef daoClef = new Dao_clef();
 
+        final char AJOUT_CLEF = '1';
+        final char SUPPR_CLEF = '2';
+        final char MODIF_CLEF = '3';
+        final char RECHERCHE_CLEF = '4';
+        final char LISTE_CLEF = '5';
+        final char UNE_CLEF = '6';
+        final char SORTIE = 'Q';
+
         // saisie
+        char saisieMenu;
+        String id;
         Iterator newClef;
         Iterator updateClef;
         Iterator searchClef;
-        int saisieMenu;
-        String id;
 
         // variable de sortie
         boolean exit = false;
@@ -32,13 +40,13 @@ public class Main_controller
             switch ( saisieMenu )
             {
                 // Ajouter un clé
-                case 1 :
+                case AJOUT_CLEF :
                     newClef = viewConsole.add();
                     daoClef.add( newClef );
                     break;
 
                 // Supprimer une clé
-                case 2 :
+                case SUPPR_CLEF :
                     // si il existe au moins une clé
                     if ( daoClef.getFirstClefs() != null )
                     {
@@ -52,7 +60,7 @@ public class Main_controller
                     break;
 
                 // modifier une clé
-                case 3 :
+                case MODIF_CLEF :
                     // si il existe au moins une clé
                     if ( daoClef.getFirstClefs() != null )
                     {
@@ -71,13 +79,13 @@ public class Main_controller
                     break;
 
                 // recherche
-                case 4 :
+                case RECHERCHE_CLEF :
                     searchClef = viewConsole.search();
                     daoClef.search( searchClef );
                     break;
 
                 // liste complète
-                case 5 :
+                case LISTE_CLEF :
                     // si il existe au moins une clé
                     if ( daoClef.getFirstClefs() != null )
                     {
@@ -90,7 +98,7 @@ public class Main_controller
                     break;
 
                 // afficher une clé
-                case 6 :
+                case UNE_CLEF :
                     // si il existe au moins une clé
                     if ( daoClef.getFirstClefs() != null )
                     {
@@ -104,7 +112,7 @@ public class Main_controller
                     break;
 
                 // sortie
-                case 7 :
+                case SORTIE :
                     exit = true;
                     break;
 

@@ -15,12 +15,11 @@ public class View_console
      * Méthodes de saisie, contient le texte correspondant à l'entrée souhaiter + une saisie de l'utilisateur
      * @return la saisie
      */
-    private int saisieMenu()
+    private char saisieMenu()
     {
-        int saisie;
+        char saisie;
 
-        saisie = sc.nextInt();
-        sc.nextLine(); // debug
+        saisie = sc.nextLine().charAt(0);
 
         return saisie;
     }
@@ -103,10 +102,10 @@ public class View_console
      * Affiche le menu principale
      * @return l'entier saisie correspondant à l'action souhaitée
      */
-    public int mainMenu()
+    public char mainMenu()
     {
         // saisie
-        int saisie;
+        char saisie;
 
         System.out.println( "Que voulez-vous faire ?" );
         System.out.println( "[1] ajouter une clé." );
@@ -115,7 +114,7 @@ public class View_console
         System.out.println( "[4] faire une recherche." );
         System.out.println( "[5] afficher la liste des clefs." );
         System.out.println( "[6] afficher une clefs précise." );
-        System.out.println( "[7] sortir du programme." );
+        System.out.println( "[Q] sortir du programme." );
 
         saisie = this.saisieMenu();
 
